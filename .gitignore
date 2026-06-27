@@ -1,0 +1,34 @@
+# --- chopshop: track code, never the sounds or working data ---
+
+# Audio working/output (lives in Google Drive, not git)
+_staging/
+inbox/
+library/
+KidsSounds/
+*.wav
+*.flac
+*.aif
+*.aiff
+*.ogg
+*.mp3
+*.m4a
+*.adg
+
+# Machine-specific config written by chopshop_doctor.py
+chopshop.json
+staging.json
+
+# Model checkpoints (huge)
+*.pt
+*.ckpt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# OS / editor
+.DS_Store
+Thumbs.db
