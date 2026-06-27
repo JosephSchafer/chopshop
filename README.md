@@ -93,3 +93,11 @@ python chopshop.py --skip-slice         # reuse existing slices, review + publis
 python chopshop.py --dry-run            # slice without the AI (no categories)
 python chopshop.py --library "D:\Sounds"  # point anywhere
 ```
+
+## License & credits
+
+MIT licensed — see [LICENSE](LICENSE). Built as a family project to make a sound
+library out of kids' field recordings. Drum Rack generation can use the
+MIT-licensed [`ableton-device-creator`](https://github.com/ben-juodvalkis/Ableton-Device-Creator),
+with a built-in fallback writer. Classification uses
+[LAION-CLAP](https://github.com/LAION-AI/CLAP).
