@@ -1,0 +1,23 @@
+# Sound Safari deploy targets - the kids' PCs.
+#
+# Copy this file to  hosts.txt  (same folder) and fill in your machines.
+# hosts.txt is gitignored so your local network details never get committed.
+#
+# One machine per line, whitespace-separated:
+#
+#   <name>        <admin-user>@<host-or-ip>      [optional app dir]
+#
+# - <name>  : a friendly label you'll use with -Only (e.g. lucas-pc)
+# - <user>  : an ADMIN account on that PC (redeploy needs git pull + pip)
+# - <host>  : the PC's hostname on your LAN, or its IP address
+# - app dir : optional; defaults to C:\SoundSafari\chopshop
+#
+# Examples (delete these and add your real ones):
+
+lucas-pc    joe@192.168.1.42
+emma-pc     joe@192.168.1.43    C:\SoundSafari\chopshop
+
+# Tip: find a PC's name/IP by running on it:
+#   hostname
+#   ipconfig | findstr IPv4
+# The setup script prints both when it finishes.

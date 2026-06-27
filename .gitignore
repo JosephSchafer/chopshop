@@ -22,6 +22,9 @@ staging.json
 *.pt
 *.ckpt
 
+# Deploy: real LAN target details stay local
+deploy/hosts.txt
+
 # Python
 __pycache__/
 *.py[cod]
