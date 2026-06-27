@@ -8,6 +8,16 @@ recordings  ──►  auto-slice + AI guess  ──►  kids review in browser 
  (inbox)              (chopshop_core)         (chopshop_web)            (library + Drum Racks)
 ```
 
+## 📚 Documentation
+
+| Doc | What's in it |
+|---|---|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | How the pipeline fits together: stages, data flow, file contracts, design principles |
+| [docs/USAGE.md](docs/USAGE.md) | Full CLI reference — every entry point and flag, with examples |
+| [docs/KIDS_GUIDE.md](docs/KIDS_GUIDE.md) | The kid-facing walkthrough of the review app |
+| [docs/ABLETON.md](docs/ABLETON.md) | Ableton Live 11 integration, `.adg` internals, metadata standards, Google Drive notes |
+| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Dev setup, testing, extending categories/backends, contributing |
+
 ## What's where
 
 | File | What it does | Who runs it |
