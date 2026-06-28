@@ -1,19 +1,42 @@
-# 🎧 Sound Safari (chopshop)
+# chopshop 🎛️
 
-Turn a messy pile of field recordings — made by kids exploring the world with a
-mic — into a clean, categorized, **Ableton Live 11**-ready sound library.
+Turn a messy pile of field recordings into a clean, categorized,
+**Ableton Live 11**-ready sound library. chopshop slices long recordings into
+individual one-shots, uses a zero-shot audio model to propose a real-world
+category for each, lets a human confirm or fix it in a browser, then publishes a
+tagged library plus playable Drum Racks.
+
+It's useful to anyone with a pile of recordings and a copy of Ableton (kids and
+adults alike), and it's the tool behind **Sound Safari**, the activity I built it
+for. See the naming note below.
 
 ```
-recordings  ──►  auto-slice + AI guess  ──►  kids review in browser  ──►  Ableton library
- (inbox)              (chopshop_core)         (chopshop_web)            (library + Drum Racks)
+recordings  ──►  auto-slice + AI guess  ──►  review in browser  ──►  Ableton library
+ (inbox)              (chopshop_core)         (chopshop_web)        (library + Drum Racks)
 ```
+
+## Naming: Sound Safari featuring chopshop
+
+Two names, two things, both first-class:
+
+- **chopshop** is the *tool* - this repo, the Python modules, the `chopshop`
+  command, the `chopshop.json` config. A standalone open-source utility for kids
+  and adults alike. This is what you install and run.
+- **Sound Safari** is the *activity* - kids going out with a mic to record the
+  world, then sorting their finds in the friendly review app. The web app, the
+  desktop icon, and the Drive folders all wear the Sound Safari name because
+  that's the experience.
+
+So the kids do a Sound Safari; chopshop is the tool that makes their pile of
+recordings usable. The two meet in the review app, which is branded Sound Safari
+for them and runs on chopshop underneath.
 
 ## 📚 Documentation
 
 | Doc | What's in it |
 |---|---|
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | How the pipeline fits together: stages, data flow, file contracts, design principles |
-| [docs/USAGE.md](docs/USAGE.md) | Full CLI reference — every entry point and flag, with examples |
+| [docs/USAGE.md](docs/USAGE.md) | Full CLI reference - every entry point and flag, with examples |
 | [docs/KIDS_GUIDE.md](docs/KIDS_GUIDE.md) | The kid-facing walkthrough of the review app |
 | [docs/ABLETON.md](docs/ABLETON.md) | Ableton Live 11 integration, `.adg` internals, metadata standards, Google Drive notes |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Dev setup, testing, extending categories/backends, contributing |
@@ -73,8 +96,8 @@ c:\Users\...\.chopshop\           ← the code (this folder, in Git)
 **Why this split:** the library and inbox live in Google Drive so they back up
 and share across the family automatically. The `_staging` working area stays
 **local** so Drive's sync client never fights with files changing mid-review.
-The **code** is tracked in **Git** (here), not Drive — code wants version
-history, and Drive can corrupt a file saved mid-edit.
+The **code** is tracked in **Git** (here), not Drive (code wants version
+history, and Drive can corrupt a file saved mid-edit).
 
 ### ⚠️ Two Drive must-dos for Ableton
 
@@ -106,7 +129,7 @@ python chopshop.py --library "D:\Sounds"  # point anywhere
 
 ## License & credits
 
-MIT licensed — see [LICENSE](LICENSE). Built as a family project to make a sound
+MIT licensed, see [LICENSE](LICENSE). Built as a family project to make a sound
 library out of kids' field recordings. Drum Rack generation can use the
 MIT-licensed [`ableton-device-creator`](https://github.com/ben-juodvalkis/Ableton-Device-Creator),
 with a built-in fallback writer. Classification uses

@@ -8,7 +8,7 @@ is for understanding or modifying it.
 ## The big picture
 
 chopshop is a four-stage pipeline. Each stage is a separate module with one job,
-and stages hand off through files on disk — never through shared process state.
+and stages hand off through files on disk - never through shared process state.
 That makes every stage independently runnable, testable, and resumable.
 
 ```
@@ -31,7 +31,7 @@ That makes every stage independently runnable, testable, and resumable.
 
 ## Stages and modules
 
-### 0. SETUP — `chopshop_doctor.py`
+### 0. SETUP - `chopshop_doctor.py`
 Runs on a bare interpreter before anything is installed. It:
 - **Detects** the machine: CPU, RAM (psutil → `/proc/meminfo` → Windows ctypes),
   NVIDIA GPUs (`nvidia-smi`), Apple Silicon, and whether torch/CLAP are present.
@@ -42,17 +42,17 @@ Runs on a bare interpreter before anything is installed. It:
   checkpoint.
 
 Detection (`profile_host`) and recommendation (`recommend`) are kept strictly
-separate: one observes, the other decides. Neither performs installs — that only
+separate: one observes, the other decides. Neither performs installs - that only
 happens behind `--install` / `--fetch-model`.
 
 Key types: `Host`, `Gpu`, `TorchInfo`, `Recommendation`, `Config`.
 
-### 1. SLICE — `chopshop_core.py`
+### 1. SLICE - `chopshop_core.py`
 The audio engine. It does two jobs and nothing else (no UI, no installs):
 - **Slice** (`detect_bounds` + `carve`): librosa onset detection plus a
   trailing-silence trim, carving a long recording into individual one-shots.
 - **Classify** (`ClapSorter`): zero-shot labelling with LAION-CLAP against a
-  *real-world* vocabulary (`KID_LABELS`) — water, metal, wood, voice, … No
+  *real-world* vocabulary (`KID_LABELS`) - water, metal, wood, voice, … No
   training; you supply the label phrases and CLAP picks the best match per slice.
 
 It writes each candidate as a native-rate WAV into the **staging** directory and
@@ -61,8 +61,8 @@ records a `Slice` row in `staging.json`. Nothing is published here.
 `chopshop_core` is also the **shared library** the other modules import
 (`Slice`, `read_staging`/`write_staging`, `KID_LABELS`, path helpers, etc.).
 
-### 2. REVIEW — `chopshop_web.py`
-A local web app (Python standard library only — no Flask, no build step) that an
+### 2. REVIEW - `chopshop_web.py`
+A local web app (Python standard library only - no Flask, no build step) that an
 11-year-old drives in a browser. It reads `staging.json`, serves one sound at a
 time with a waveform and big buttons, and writes the kid's decisions straight
 back to `staging.json`:
@@ -74,10 +74,10 @@ back to `staging.json`:
 All mutations go through the `Library` class behind a lock, so the on-disk
 manifest stays consistent even though the browser fires several requests at once.
 
-### 3. PUBLISH — `chopshop_build.py`
+### 3. PUBLISH - `chopshop_build.py`
 Reads the reviewed `staging.json` and, for every slice marked `keep`:
 1. Writes a clean WAV into `library/<Category>/` with **embedded metadata**
-   (BWF `bext` + RIFF `INFO` tags) — see [ABLETON.md](ABLETON.md).
+   (BWF `bext` + RIFF `INFO` tags) - see [ABLETON.md](ABLETON.md).
 2. Builds one **Drum Rack (`.adg`)** per category into `library/_racks/`, using
    library-relative sample paths so the racks stay portable.
 3. Writes a master `manifest.csv` / `manifest.json`.
@@ -85,7 +85,7 @@ Reads the reviewed `staging.json` and, for every slice marked `keep`:
 Rack generation prefers the MIT-licensed `ableton-device-creator` package and
 falls back to a self-contained gzipped-XML writer if it isn't installed.
 
-### Launcher — `chopshop.py`
+### Launcher - `chopshop.py`
 A thin orchestrator. The full run slices the inbox, opens the review app, waits
 for the grown-up to stop the server (Ctrl+C) once the kids are done, then
 publishes. Stage shortcuts (`--review-only`, `--build-only`, `--skip-slice`) let
@@ -106,7 +106,7 @@ ClapSorter.classify_batch()       batched CLAP labels (skipped on --dry-run)
 _staging/<source>_<NNN>.wav       one WAV per candidate slice
 _staging/staging.json             list[Slice] manifest
    │
-   │   (kids review in the browser — edits status/category/name in place,
+   │   (kids review in the browser - edits status/category/name in place,
    │    and trim/merge rewrite the staging WAVs)
    ▼
 publish_wavs()                    kept slices → library/<Category>/*.wav (+meta)
@@ -119,7 +119,7 @@ write_manifest()                  library/manifest.{csv,json}
 The pipeline is glued together by three file formats. Treat their shapes as
 APIs.
 
-### `chopshop.json` — runtime config (doctor → everyone)
+### `chopshop.json` - runtime config (doctor → everyone)
 Written by `chopshop_doctor.py`; the `runtime` block is read by
 `chopshop_core.load_runtime()`. Versioned by `CONFIG_VERSION`.
 
@@ -139,10 +139,10 @@ Written by `chopshop_doctor.py`; the `runtime` block is read by
 ```
 
 Only the `runtime` block is consumed downstream; the rest is informational. A
-missing or unreadable file is fine — `load_runtime()` returns safe defaults
+missing or unreadable file is fine - `load_runtime()` returns safe defaults
 (`cpu`, batch 8).
 
-### `staging.json` — the review manifest (core ↔ web → build)
+### `staging.json` - the review manifest (core ↔ web → build)
 Written by `chopshop_core.write_staging()`, edited by the web app, read by the
 builder. Versioned by `STAGING_VERSION`.
 
@@ -169,7 +169,7 @@ builder. Versioned by `STAGING_VERSION`.
 `Slice.from_dict()` ignores unknown keys, so the schema can gain fields without
 breaking older manifests.
 
-### `.adg` — Ableton Drum Rack (build → Ableton)
+### `.adg` - Ableton Drum Rack (build → Ableton)
 Gzipped Live XML, one per category. See [ABLETON.md](ABLETON.md) for the full
 structure, the relative-path scheme that keeps racks portable, and the
 template-vs-fallback generation paths.
@@ -200,5 +200,5 @@ chopshop.py
 chopshop_doctor.py   (stdlib only; optional psutil/torch/laion_clap probing)
 ```
 
-`chopshop_doctor.py` is intentionally standalone — it shares no imports with the
+`chopshop_doctor.py` is intentionally standalone - it shares no imports with the
 rest so it can run on a clean machine.

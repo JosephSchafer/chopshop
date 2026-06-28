@@ -62,7 +62,7 @@ tone bursts separated by silence):
    mutation routes.
 
 When changing the slicer, builder, or web API, re-run an equivalent end-to-end
-check. There's no formal test suite yet — see *Ideas* below.
+check. There's no formal test suite yet - see *Ideas* below.
 
 ---
 
@@ -89,13 +89,13 @@ Edit `KID_LABELS` in `chopshop_core.py`. Each entry is
 ("rain", "the sound of rain falling", "🌧️", "Rain"),
 ```
 
-- `slug` — folder/url-safe id used in `staging.json` and filenames.
-- `clap_phrase` — what CLAP actually matches against. **Short descriptive
+- `slug` - folder/url-safe id used in `staging.json` and filenames.
+- `clap_phrase` - what CLAP actually matches against. **Short descriptive
   phrases beat bare nouns** ("the sound of rain falling", not "rain").
-- `emoji` / `friendly_name` — shown in the web app and used for folder names.
+- `emoji` / `friendly_name` - shown in the web app and used for folder names.
 
 Everything downstream (web grid, publish folders, `slug_for_phrase`) reads from
-this one list — no other file needs touching.
+this one list - no other file needs touching.
 
 ### Use a custom vocabulary at runtime
 Without editing code:
@@ -160,6 +160,6 @@ This is MIT-licensed (see [LICENSE](../LICENSE)).
   and the `.adg` XML, using synthetic fixtures.
 - **True split** (one slice → two keepers) in the web app, alongside trim/merge.
 - **YAMNet backend** for low-RAM machines (the doctor already recommends it).
-- **Batch-uniform classification** — group slices by length before batching for
+- **Batch-uniform classification** - group slices by length before batching for
   tighter CLAP batches.
 - **Live Clips (`.alc`)** as an optional output alongside Drum Racks.

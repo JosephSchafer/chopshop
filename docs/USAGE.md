@@ -10,7 +10,7 @@ are run directly only when you want a single stage.
 
 ---
 
-## `chopshop_doctor.py` — setup & install
+## `chopshop_doctor.py` - setup & install
 
 Detect hardware, recommend a setup, write `chopshop.json`, optionally install.
 
@@ -39,7 +39,7 @@ python chopshop_doctor.py --fetch-model
 
 ---
 
-## `chopshop.py` — the launcher (main entry point)
+## `chopshop.py` - the launcher (main entry point)
 
 Runs SLICE → REVIEW → PUBLISH in order. The grown-up's one command.
 
@@ -106,7 +106,7 @@ python chopshop.py --port 9000 --no-open         # custom port, no auto browser
 
 ---
 
-## `chopshop_core.py` — slice stage on its own
+## `chopshop_core.py` - slice stage on its own
 
 Useful for slicing/classifying without the launcher (e.g. headless batches).
 
@@ -117,7 +117,7 @@ python chopshop_core.py recording.wav --dry-run     # one file, no model
 
 | Flag | Default | Meaning |
 |---|---|---|
-| `input` (positional) | — | Audio file or folder of recordings. |
+| `input` (positional) | - | Audio file or folder of recordings. |
 | `--staging PATH` | `./_staging` | Staging directory to write into. |
 | `--config PATH` | `None` | `chopshop.json` for device/batch. |
 | `--dry-run` | off | Slice only; skip classification (no model load). |
@@ -129,7 +129,7 @@ python chopshop_core.py recording.wav --dry-run     # one file, no model
 
 ---
 
-## `chopshop_web.py` — review app on its own
+## `chopshop_web.py` - review app on its own
 
 Serve the staging set for review without slicing or publishing.
 
@@ -152,9 +152,9 @@ The page talks to a small JSON API on the same server:
 
 | Method & route | Body | Purpose |
 |---|---|---|
-| `GET /` | — | The single-page app (HTML/CSS/JS). |
-| `GET /api/state` | — | Full summary: totals + every slice. |
-| `GET /api/audio?index=N` | — | The WAV bytes for slice N. |
+| `GET /` | - | The single-page app (HTML/CSS/JS). |
+| `GET /api/state` | - | Full summary: totals + every slice. |
+| `GET /api/audio?index=N` | - | The WAV bytes for slice N. |
 | `POST /api/keep` | `{index}` | Mark slice kept. |
 | `POST /api/trash` | `{index}` | Mark slice trashed. |
 | `POST /api/category` | `{index, slug}` | Set category (confidence → 1.0). |
@@ -164,7 +164,7 @@ The page talks to a small JSON API on the same server:
 
 ---
 
-## `chopshop_build.py` — publish stage on its own
+## `chopshop_build.py` - publish stage on its own
 
 Publish whatever is already reviewed in a staging set.
 

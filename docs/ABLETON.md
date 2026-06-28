@@ -22,7 +22,7 @@ library/
 
 Two things make this Ableton-friendly:
 1. A **clean folder-per-category tree** of WAVs you can browse in Live's Browser.
-2. **Drum Racks (`.adg`)** — drop one on a track and the whole category is mapped
+2. **Drum Racks (`.adg`)** - drop one on a track and the whole category is mapped
    across the pads, instantly playable.
 
 ---
@@ -66,17 +66,17 @@ Drive.
 Every published WAV is plain PCM (24-bit) plus two optional metadata chunks that
 travel *inside* the file:
 
-- **RIFF `INFO` (`LIST/INFO`)** — the widely-read tag block. chopshop writes:
-  - `INAM` — title (the custom name, or the category)
-  - `IKEY` — keywords (category + `chopshop` + `sound-safari`)
-  - `ICMT` — comment ("Sound Safari capture from <source>")
-  - `ISFT` — software ("chopshop Sound Safari")
-- **BWF `bext`** — the Broadcast-WAV description block (256-char description).
+- **RIFF `INFO` (`LIST/INFO`)** - the widely-read tag block. chopshop writes:
+  - `INAM` - title (the custom name, or the category)
+  - `IKEY` - keywords (category + `chopshop` + `sound-safari`)
+  - `ICMT` - comment ("Sound Safari capture from <source>")
+  - `ISFT` - software ("chopshop Sound Safari")
+- **BWF `bext`** - the Broadcast-WAV description block (256-char description).
 
 These are **open standards** read by Live, other DAWs, and many file managers, so
 the label/keywords aren't trapped in chopshop. They're *optional* chunks: any
 player that doesn't understand them simply ignores the extra bytes. The metadata
-is also best-effort — if writing fails for any reason, the audio is still valid.
+is also best-effort - if writing fails for any reason, the audio is still valid.
 
 Implementation: `_embed_metadata`, `_info_chunk`, `_bext_chunk` in
 `chopshop_build.py`. It appends the chunks and fixes the RIFF size field; no
@@ -153,15 +153,15 @@ Implementation: `build_racks`, `_drum_rack_xml`, `_branch_xml` in
 
 ## Two ways racks get built
 
-1. **Preferred — `ableton-device-creator`** (MIT, pip-installable). A
+1. **Preferred - `ableton-device-creator`** (MIT, pip-installable). A
    template-driven builder: it decompresses a known-good `.adg` template, fills in
    samples, and recompresses. Because the template comes from a real Live export,
    the schema is guaranteed correct for that Live version. Pass your own template
    with `--rack-template`.
-2. **Fallback — built-in writer.** If that package isn't installed, chopshop
+2. **Fallback - built-in writer.** If that package isn't installed, chopshop
    writes the gzipped XML itself (shown above). It produces structurally valid,
    relative-path racks, but should be **spot-checked in your Live 11** before bulk
-   use — schema details vary slightly between Live builds.
+   use - schema details vary slightly between Live builds.
 
 > ⚠️ **Verification status:** the fallback writer's output passes structural
 > tests but has not yet been confirmed to load cleanly in a live Ableton 11
